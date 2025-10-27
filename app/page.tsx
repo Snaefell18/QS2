@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
-import { captureAndStore, type ActionResult } from './actions';
-import { useActionState, useEffect, useState } from 'react';
+import ClientForm from './ClientForm';
 
 const DEFAULT_EMAIL = 'jan.rentzsch@googlemail.com';
 const DEFAULT_URL = 'https://www.wsj.com/market-data/currencies/exchangerates';
@@ -15,6 +14,11 @@ function readServerDefaults() {
     email: lastEmail || DEFAULT_EMAIL,
     url: lastUrl || DEFAULT_URL,
   };
+}
+
+export default function Page() {
+  const { email, url } = readServerDefaults();
+  return <ClientForm initialEmail={email} initialUrl={url} />;
 }
 
 function ClientForm({ initialEmail, initialUrl }: { initialEmail: string; initialUrl: string }) {
